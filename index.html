@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>session (value)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body id="body">
+    <div class="preloader" id="preloader">
+        <span id="wait" class="loader-txt">please wait...</span>
+    </div>
+    
+    <div class="nav-overlay" id="navOverlay" style="opacity: 0;" onclick="selectionToggle()">
+        <div class="main" id="main">
+            <div class="item" onclick="console.log('dashboard') + dashboardOverlay()" id="dashboardLayer">Dashboard</div>
+            <div class="item" onclick="console.log('config') + configOverlay()" id="configLayer">Config</div>
+            <div class="item" onclick="console.log('logs') +logsOverlay()" id="logsLayer">Logs</div>
+        </div>
+    </div>
+    
+    <nav>
+        <span onclick="selectionToggle()" id="currentOverlay" onmouseover="panelTooltipShow()" onmouseleave="panelTooltipHide()">Dashboard</span>
+        <div class="logo" onclick="selectionToggle()">email hammer<div class="break"> // </div><span class="greyed">disarmed</span></div>
+        <i class="fi fi-bs-info" onmouseover="infoTooltipShow()" onmouseleave="infoTooltipHide()"></i>
+    </nav>
+
+    <div class="info-tooltip tooltip" id="infotooltip">
+        <span id="infoTooltip">Setting correct information in the config panel is recomended before usage of this tool. click on "Dashboard" at the top left to bring up the panel selector overlay.</span>
+    </div>
+
+    <div class="panel-tooltip tooltip" id="paneltooltip">
+        <span id="panelTooltip">Click this to change the current panel.</span>
+    </div>
+
+    <div class="logged-status tooltip" id="loggedtooltip">
+        <span>You are currently logged out. You can log in on the config panel or by clicking on this button and following further steps.</span>
+    </div>
+
+    <div class="dashboard-panel" id="dashboardOverlay">
+        <div class="recent tile">
+            <div class="top">
+                <span class="title">Recent Attacks</span>
+            </div>
+            <div class="list">
+                <div>
+                    <span>unavalible</span>
+                    <span class="amount">n/a emails</span>
+                </div>
+
+                <div>
+                    <span>unavalible</span>
+                    <span class="amount">n/a emails</span>
+                </div>
+
+                <div>
+                    <span>unavalible</span>
+                    <span class="amount">n/a emails</span>
+                </div>
+                
+                <div>
+                    <span>unavalible</span>
+                    <span class="amount">n/a emails</span>
+                </div>
+
+                <div>
+                    <span>unavalible</span>
+                    <span class="amount">n/a emails</span>
+                </div>
+
+                <div>
+                    <span>unavalible</span>
+                    <span class="amount">n/a emails</span>
+                </div>
+
+                <div>
+                    <span>unavalible</span>
+                    <span class="amount">n/a emails</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-attack tile">
+            <div class="top">
+                <span class="title">Attack</span>
+                <div class="status" onmouseover="loggedTooltipShow()" onmouseleave="loggedTooltipHide()">
+                    <span class="status-text">Status: Logged Out</span>
+                    <div class="status-icon"></div>
+                </div>
+            </div>
+            
+            <div class="target-field input-field">
+                <input class="target field" value="email@example.com" onclick="textRemove()" id="target" onblur="textDetect()">
+                <div class="underline">
+                    <span>target email</span>
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="amount-field input-field">
+                <input class="field" value="10" onclick="amountRemove()" id="amount" onblur="amountDetect()">
+                <div class="underline">
+                    <span>email amount</span>
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="delay-field input-field">
+                <input class="field" value="500" onclick="delayRemove()" id="delay" onblur="delayDetect()">
+                <div class="underline">
+                    <span>email delay (ms)</span>
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="attack-btn">
+                <span>Send Attack</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="config-panel" id="configOverlay">
+        <div class="config tile">
+            <div class="top-bar">
+                <span class="title">Configuration</span>
+                <div class="config-options">
+                    <div class="dropdown">
+                        <span class="preset">Change Preset</span>
+                    </div>
+                    <a class="apply-btn" onclick="refresh()">Apply</a>
+                </div>
+            </div>
+
+            <div class="option">
+                <div class="query">Inital loading screen.</div>
+                <div class="user-response" onclick="bypassToggle()">
+                    <span id="bypassText">on</span>
+                    <div class="user-toggle" id="bypassLight" style="background-color: var(--primary);"></div>
+                </div>
+            </div>
+
+            <div class="option">
+                <div class="query">Alert popup before sending attack (saftey switch).</div>
+                <div class="user-response" onclick="alertToggle()">
+                    <span id="alertText">on</span>
+                    <div class="user-toggle" id="alertLight" style="background-color: var(--primary);"></div>
+                </div>
+            </div>
+
+            <div class="option">
+                <div class="query">Animations / Transitions.</div>
+                <div class="user-response" onclick="animToggle()">
+                    <span id="animText">on</span>
+                    <div class="user-toggle" id="animLight" style="background-color: var(--primary);"></div>
+                </div>
+            </div>
+
+            <div class="option">
+                <div class="query">Logout after finished session</div>
+                <div class="user-response" onclick="logoutToggle()">
+                    <span id="logoutText">off</span>
+                    <div class="user-toggle" id="logoutLight"></div>
+                </div>
+            </div>
+
+            <div class="config-break"></div>
+
+            <div class="target-field input-field config-field">
+                <input class="target field" value="email@example.com" onclick="textRemoveConfig()" id="targetConfig" onblur="textDetectConfig()">
+                <div class="underline">
+                    <span>overide defualt target</span>
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="amount-field input-field config-field">
+                <input class="field" value="10" onclick="amountRemoveConfig()" id="amountConfig" onblur="amountDetectConfig()">
+                <div class="underline">
+                    <span>overide default amount</span>
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="delay-field input-field config-field">
+                <input class="field" value="500" onclick="delayRemoveConfig()" id="delayConfig" onblur="delayDetectConfig()">
+                <div class="underline">
+                    <span>overide default delay (ms)</span>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="logs-panel" id="logsOverlay">
+        <div class="tile">
+            <span>Logs</span>
+        </div>
+    </div>
+
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+    <script src="mail.js"></script>
+</body>
+</html>
