@@ -37,6 +37,10 @@
         <span>You are currently logged out. You can log in on the config panel or by clicking on this button and following further steps.</span>
     </div>
 
+    <div class="cookie-tooltip tooltip" id="cookietooltip">
+        <span>Modify cookie settings (change what the website remebers after you leave).</span>
+    </div>
+
     <div class="dashboard-panel" id="dashboardOverlay">
         <div class="recent tile">
             <div class="top">
@@ -124,9 +128,10 @@
             <div class="top-bar">
                 <span class="title">Configuration</span>
                 <div class="config-options">
-                    <div class="dropdown">
-                        <span class="preset">Change Preset</span>
+                    <div class="cookie-settings">
+                        <i class="fi fi-bs-cookie" onmouseover="cookieTooltipShow()" onmouseleave="cookieTooltipHide()"></i>
                     </div>
+                    
                     <a class="apply-btn" onclick="refresh()">Apply</a>
                 </div>
             </div>
@@ -185,6 +190,24 @@
                 <input class="field" value="500" onclick="delayRemoveConfig()" id="delayConfig" onblur="delayDetectConfig()">
                 <div class="underline">
                     <span>overide default delay (ms)</span>
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="config-break"></div>
+
+            <div class="color-field input-field config-field">
+                <input class="field" value="#a7ff84" id="colorConfigPrimary" onblur="colorSetPrimary()" onkeyup="colorSetPrimary()"style="color: #a7ff84;">
+                <div class="underline">
+                    <span style="color: var(--primary);">overide primary color (hex code)</span>
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="color-field input-field config-field">
+                <input class="field" value="#ff8484" id="colorConfigSecondary" onblur="colorSetSecondary()" onkeyup="colorSetSecondary()" style="color: #ff8484;">
+                <div class="underline">
+                    <span style="color: var(--secondary);">overide secondary color (hex code)</span>
                     <div></div>
                 </div>
             </div>

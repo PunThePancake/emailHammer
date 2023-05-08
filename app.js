@@ -9,7 +9,7 @@ function selectionToggle() {
     var main = document.getElementById('main');
     
     if (mainOver.style.opacity === '0') {
-        mainOver.style.zIndex = '5'
+        mainOver.style.zIndex = '9999'
         setTimeout(() => {
             mainOver.style.opacity = '1'
             main.style.transform = 'translateY(0rem)'
@@ -69,6 +69,20 @@ function loggedTooltipShow() {
 
 function loggedTooltipHide() {
     var tooltip = document.getElementById('loggedtooltip')
+
+    tooltip.style.opacity = '0'
+    tooltip.style.transform = 'translateY(1rem)'
+}
+
+function cookieTooltipShow() {
+    var tooltip = document.getElementById('cookietooltip')
+
+    tooltip.style.opacity = '1'
+    tooltip.style.transform = 'translateY(0rem)'
+}
+
+function cookieTooltipHide() {
+    var tooltip = document.getElementById('cookietooltip')
 
     tooltip.style.opacity = '0'
     tooltip.style.transform = 'translateY(1rem)'
@@ -187,7 +201,7 @@ function dashboardOverlay() {
         config.style.transform = 'translateY(3rem)'
         logs.style.opacity = '0'
         logs.style.transform = 'translateY(3rem)' 
-        body.style.overflowX = 'hidden'
+        body.style.overflowY = 'hidden'
         document.getElementById('infoTooltip').textContent = 'Setting correct information in the config panel is recomended before usage of this tool. click on "Dashboard" at the top left to bring up the panel selector overlay.'
     }, "1");
 
@@ -208,7 +222,7 @@ function configOverlay() {
         config.style.transform = 'translateY(0rem)'
         logs.style.opacity = '0'
         logs.style.transform = 'translateY(3rem)'
-        body.style.overflowX = 'none'
+        body.style.overflowY = 'auto'
         document.getElementById('infoTooltip').textContent = 'Before finishing make sure to press apply to set the configuration properly, after pressing apply the page will refresh and bring you back to the dashboard panel.'
     }, "1");
    
@@ -229,7 +243,7 @@ function logsOverlay() {
         config.style.transform = 'translateY(3rem)'
         logs.style.opacity = '1'
         logs.style.transform = 'translateY(0rem)'
-        body.style.overflowX = 'hidden'
+        body.style.overflowY = 'hidden'
         document.getElementById('infoTooltip').textContent = 'Find all attack history and details here, you can delete specific logs by pressing on the manage button then pressing the minus button next to the specified details.'
     }, "1");
    
@@ -247,13 +261,13 @@ function bypassToggle() {
 
     if (text.textContent === 'off') {
         text.textContent = 'on'
-        light.style.backgroundColor = '#a7ff84'
+        light.style.backgroundColor = 'var(--primary)'
         document.cookie = 'bypassToggle=true'
     }
 
     else {
         text.textContent = 'off'
-        light.style.backgroundColor = '#ff8484'
+        light.style.backgroundColor = 'var(--secondary)'
         document.cookie = 'bypassToggle=false'
     }
 }
@@ -264,13 +278,13 @@ function alertToggle() {
 
     if (text.textContent === 'off') {
         text.textContent = 'on'
-        light.style.backgroundColor = '#a7ff84'
+        light.style.backgroundColor = 'var(--primary)'
         document.cookie = 'popupToggle=true'
     }
 
     else {
         text.textContent = 'off'
-        light.style.backgroundColor = '#ff8484'
+        light.style.backgroundColor = 'var(--secondary)'
         document.cookie = 'popupToggle=false'
     }
 }
@@ -281,13 +295,13 @@ function animToggle() {
 
     if (text.textContent === 'off') {
         text.textContent = 'on'
-        light.style.backgroundColor = '#a7ff84'
+        light.style.backgroundColor = 'var(--primary)'
         document.cookie = 'animsToggle=true'
     }
 
     else {
         text.textContent = 'off'
-        light.style.backgroundColor = '#ff8484'
+        light.style.backgroundColor = 'var(--secondary)'
         document.cookie = 'animsToggle=false'
     }
 }
@@ -298,13 +312,31 @@ function logoutToggle() {
 
     if (text.textContent === 'off') {
         text.textContent = 'on'
-        light.style.backgroundColor = '#a7ff84'
+        light.style.backgroundColor = 'var(--primary)'
         document.cookie = 'logoutToggle=true'
     }
 
     else {
         text.textContent = 'off'
-        light.style.backgroundColor = '#ff8484'
+        light.style.backgroundColor = 'var(--secondary)'
         document.cookie = 'logoutToggle=false'
     }
+}
+
+function colorSetPrimary() {
+    var root = document.querySelector(':root')
+    var input = document.getElementById('colorConfigPrimary')
+    customColorInput = input.value
+    root.style.setProperty('--primary', customColorInput)
+    document.cookie = 'primaryColor =' + customColorInput
+    input.style.color = (customColorInput)
+}
+
+function colorSetSecondary() {
+    var root = document.querySelector(':root')
+    var input = document.getElementById('colorConfigSecondary')
+    customColorInput = input.value
+    root.style.setProperty('--secondary', customColorInput)
+    document.cookie = 'secondaryColor =' + customColorInput
+    input.style.color = (customColorInput)
 }
