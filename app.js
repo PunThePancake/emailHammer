@@ -185,6 +185,33 @@ function delayDetectConfig() {
     }
 }
 
+function senderRemoveConfig() {
+    var delay = document.getElementById('senderConfig')
+    if (delay.value === 'your@email.here') {
+        delay.value = ''
+    }
+}
+
+function senderDetectConfig() {
+    var delay = document.getElementById('senderConfig')
+    if (delay.value === '') {
+        delay.value = 'your@email.here'
+    }
+}
+
+function passRemoveConfig() {
+    var delay = document.getElementById('passConfig')
+    if (delay.value === 'sender password') {
+        delay.value = ''
+    }
+}
+
+function passDetectConfig() {
+    var delay = document.getElementById('passConfig')
+    if (delay.value === '') {
+        delay.value = 'sender password'
+    }
+}
 
 var current = document.getElementById('currentOverlay')
 
@@ -323,6 +350,22 @@ function logoutToggle() {
     }
 }
 
+var cookies = document.cookie
+  .split(';')
+  .map(cookie => cookie.split('='))
+  .reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+
+function cookieSetter() {
+    var root = document.querySelector(':root')
+    var inputPrimary = document.getElementById('colorConfigPrimary')
+    var inputSecondary = document.getElementById('colorConfigSecondary')
+
+    root.style.setProperty('--primary', cookies.primaryColor)
+    inputPrimary.value = cookies.primaryColor
+    root.style.setProperty('--secondary', cookies.secondaryColor)
+    inputSecondary.value = cookies.secondaryColor
+}
+
 function colorSetPrimary() {
     var root = document.querySelector(':root')
     var input = document.getElementById('colorConfigPrimary')
@@ -339,4 +382,28 @@ function colorSetSecondary() {
     root.style.setProperty('--secondary', customColorInput)
     document.cookie = 'secondaryColor =' + customColorInput
     input.style.color = (customColorInput)
+}
+
+function cookieToggle() {
+    var mainOver = document.getElementById('cookieOverlay');
+    var main = document.getElementById('cookieMain');
+    
+    if (mainOver.style.opacity === '0') {
+        mainOver.style.zIndex = '9999'
+        setTimeout(() => {
+            mainOver.style.opacity = '1'
+            main.style.transform = 'translateY(0rem)'
+            main.style.pointerEvents = 'all'
+        }, "1");
+    }
+    else {
+
+        mainOver.style.opacity = '0'
+        main.style.transform = 'translateY(3rem)'
+        main.style.pointerEvents = 'none'
+
+        setTimeout(() => {
+            mainOver.style.zIndex = '-1'
+        }, "300");
+    }
 }

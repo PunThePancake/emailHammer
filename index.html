@@ -6,16 +6,28 @@
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body id="body">
+<body id="body" onload="cookieSetter()">
     <div class="preloader" id="preloader">
         <span id="wait" class="loader-txt">please wait...</span>
     </div>
     
-    <div class="nav-overlay" id="navOverlay" style="opacity: 0;" onclick="selectionToggle()">
+    <div class="overlay" id="navOverlay" style="opacity: 0;" onclick="selectionToggle()">
         <div class="main" id="main">
             <div class="item" onclick="console.log('dashboard') + dashboardOverlay()" id="dashboardLayer">Dashboard</div>
             <div class="item" onclick="console.log('config') + configOverlay()" id="configLayer">Config</div>
             <div class="item" onclick="console.log('logs') +logsOverlay()" id="logsLayer">Logs</div>
+        </div>
+    </div>
+
+    <div class="overlay cookie-overlay" id="cookieOverlay" style="opacity: 0;" onclick="cookieToggle()">
+        <div class="main" id="cookieMain">
+            <span class="title">Cookie Settings</span>
+            <span class="text">By clicking "Allow", you allow this website to generate cookies to remember your configuration and make the webiste more funtional and user friendly. By clicking "Deny" you accept that the overall functionality is lessened.<br><br>+ You can change this setting at anytime.<br><span class="primary-color">+ You currently allow the website to make cookies.</span></span>
+            
+            <div class="btns">
+                <span class="deny">Deny</span>
+                <span class="accept">Allow</span>
+            </div>
         </div>
     </div>
     
@@ -129,7 +141,7 @@
                 <span class="title">Configuration</span>
                 <div class="config-options">
                     <div class="cookie-settings">
-                        <i class="fi fi-bs-cookie" onmouseover="cookieTooltipShow()" onmouseleave="cookieTooltipHide()"></i>
+                        <i class="fi fi-bs-cookie" onmouseover="cookieTooltipShow()" onmouseleave="cookieTooltipHide()" onclick="cookieToggle()"></i>
                     </div>
                     
                     <a class="apply-btn" onclick="refresh()">Apply</a>
@@ -196,8 +208,26 @@
 
             <div class="config-break"></div>
 
+            <div class="sender-field input-field config-field">
+                <input class="sender field" value="your@email.here" onclick="senderRemoveConfig()" id="senderConfig" onblur="senderDetectConfig()">
+                <div class="underline">
+                    <span>sender email</span>
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="pass-field input-field config-field">
+                <input class="pass field" value="sender password" onclick="passRemoveConfig()" id="passConfig" onblur="passDetectConfig()">
+                <div class="underline">
+                    <span>sender email password</span>
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="config-break"></div>
+
             <div class="color-field input-field config-field">
-                <input class="field" value="#a7ff84" id="colorConfigPrimary" onblur="colorSetPrimary()" onkeyup="colorSetPrimary()"style="color: #a7ff84;">
+                <input class="field" value="#a7ff84" id="colorConfigPrimary" onblur="colorSetPrimary()" onkeyup="colorSetPrimary()"style="color: var(--primary)">
                 <div class="underline">
                     <span style="color: var(--primary);">overide primary color (hex code)</span>
                     <div></div>
@@ -205,7 +235,7 @@
             </div>
 
             <div class="color-field input-field config-field">
-                <input class="field" value="#ff8484" id="colorConfigSecondary" onblur="colorSetSecondary()" onkeyup="colorSetSecondary()" style="color: #ff8484;">
+                <input class="field" value="#ff8484" id="colorConfigSecondary" onblur="colorSetSecondary()" onkeyup="colorSetSecondary()" style="color: var(--secondary)">
                 <div class="underline">
                     <span style="color: var(--secondary);">overide secondary color (hex code)</span>
                     <div></div>
