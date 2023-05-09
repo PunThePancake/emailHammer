@@ -218,6 +218,7 @@ nav > span:hover {
     background-color: var(--primary);
     color: #0f0f0f;
     transition: 0.3s cubic-bezier(.17,.67,.24,1);
+    scale: 1.1;
 }
 
 .overlay > .main > .item:active {
@@ -236,6 +237,11 @@ nav > span:hover {
 
 .cookie-overlay > .main > .btns {
     margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    white-space: nowrap;
 }
 
 .cookie-overlay > .main > .btns > span {
@@ -247,6 +253,15 @@ nav > span:hover {
     transition: 0.3s cubic-bezier(.17,.67,.24,1);
     font-weight: 900;
     user-select: none;
+}
+
+.cookie-overlay > .main > .btns > .deny {
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+}
+
+.cookie-overlay > .main > .btns > .deny:hover {
+    background-color: var(--secondary);
 }
 
 .cookie-overlay > .main > .btns > span:hover {
@@ -309,7 +324,7 @@ nav > span:hover {
     transition: 0.3s cubic-bezier(.17,.67,.24,1);
 }
 
-.tile > .top > .status > .status-text:hover {
+.status:hover .status-text {
     opacity: 1;
     transition: 0.3s cubic-bezier(.17,.67,.24,1);
 }
@@ -524,6 +539,7 @@ nav > span:hover {
     background-color: var(--primary);
     color: #0f0f0f;
     transition: 0.3s cubic-bezier(.17,.67,.24,1);
+    scale: 1.1;
 }
 
 .apply-btn:active {
@@ -619,6 +635,7 @@ nav > span:hover {
     color: #0f0f0f;
     background-color: var(--primary);
     transition: 0.3s cubic-bezier(.17,.67,.24,1);
+    scale: 1.1;
 }
 
 .cookie-settings > i:active {

@@ -360,10 +360,28 @@ function cookieSetter() {
     var inputPrimary = document.getElementById('colorConfigPrimary')
     var inputSecondary = document.getElementById('colorConfigSecondary')
 
-    root.style.setProperty('--primary', cookies.primaryColor)
-    inputPrimary.value = cookies.primaryColor
-    root.style.setProperty('--secondary', cookies.secondaryColor)
-    inputSecondary.value = cookies.secondaryColor
+    if (cookies.primaryColor == null) {
+        root.style.setProperty('--primary', '#a7ff84')
+        document.cookie = 'primaryColor =' + inputPrimary.value
+        location.reload()
+    }
+
+    else {
+        root.style.setProperty('--primary', cookies.primaryColor)
+        inputPrimary.value = cookies.primaryColor
+    }
+
+    if (cookies.secondaryColor == null) {
+        root.style.setProperty('--secondary', '#ff8484')
+        document.cookie = 'secondaryColor =' + inputSecondary.value
+        location.reload()
+    }
+
+    else {
+        root.style.setProperty('--secondary', cookies.secondaryColor)
+        inputSecondary.value = cookies.secondaryColor
+    }
+
 }
 
 function colorSetPrimary() {
@@ -406,4 +424,11 @@ function cookieToggle() {
             mainOver.style.zIndex = '-1'
         }, "300");
     }
+}
+
+function deleteAllCookies() {
+    var c = document.cookie.split("; ");
+    for (i in c) 
+    document.cookie =/^[^=]+/.exec(c[i])[0]+"=;expires=Thu, 01 Jan 1970 00:00:00 GMT";  
+    location.reload();
 }

@@ -22,11 +22,11 @@
     <div class="overlay cookie-overlay" id="cookieOverlay" style="opacity: 0;" onclick="cookieToggle()">
         <div class="main" id="cookieMain">
             <span class="title">Cookie Settings</span>
-            <span class="text">By clicking "Allow", you allow this website to generate cookies to remember your configuration and make the webiste more funtional and user friendly. By clicking "Deny" you accept that the overall functionality is lessened.<br><br>+ You can change this setting at anytime.<br><span class="primary-color">+ You currently allow the website to make cookies.</span></span>
+            <span class="text">This website uses cookies to remember your preferences for the configuration details, etc. Clearing cookies will reset the preferences back to facotry default and can not be undone.</span>
             
             <div class="btns">
-                <span class="deny">Deny</span>
-                <span class="accept">Allow</span>
+                <span class="deny" onclick="deleteAllCookies()">Clear</span>
+                <span class="accept" onclick="console.log('kept cookies.')">Keep Cookies</span>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
     </div>
 
     <div class="cookie-tooltip tooltip" id="cookietooltip">
-        <span>Modify cookie settings (change what the website remebers after you leave).</span>
+        <span>Modify cookie settings (change what the website remembers).</span>
     </div>
 
     <div class="dashboard-panel" id="dashboardOverlay">
