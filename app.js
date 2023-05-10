@@ -1,6 +1,61 @@
 var body = document.getElementById('body')
 
-function refresh() {
+function apply() {
+    var bypass = document.getElementById('bypassLight')
+    var alert = document.getElementById('alertLight')
+    var anim = document.getElementById('alertLight')
+    var logout = document.getElementById('logoutLight')
+
+    var target = document.getElementById('targetConfig')
+    var amount = document.getElementById('amountConfig')
+    var delay = document.getElementById('delayConfig')
+
+    var sender = document.getElementById('senderConfig')
+    var pass = document.getElementById('passConfig')
+    var inputPrimary = document.getElementById('colorConfigPrimary')
+    var inputSecondary = document.getElementById('colorConfigSecondary')
+
+    if (bypass.style.backgroundColor == 'var(--primary)') {
+        document.cookie = 'bypassLight=true'
+    }
+
+    else {
+        document.cookie = 'bypassLight=false'
+    }
+
+    if (alert.style.backgroundColor == 'var(--primary)') {
+        document.cookie = 'alertLight=true'
+    }
+
+    else {
+        document.cookie = 'alertLight=false'
+    }
+
+    if (anim.style.backgroundColor == 'var(--primary)') {
+        document.cookie = 'animLight=true'
+    }
+
+    else {
+        document.cookie = 'animLight=false'
+    }
+
+    if (logout.style.backgroundColor == 'var(--primary)') {
+        document.cookie = 'logoutLight=true'
+    }
+
+    else {
+        document.cookie = 'logoutLight=false'
+    }
+
+    document.cookie = 'target=' + target.value
+    document.cookie = 'amount=' + amount.value
+    document.cookie = 'delay=' + delay.value
+
+    document.cookie = 'sender=' + sender.value
+    document.cookie = 'pass=' + pass.value
+    document.cookie = 'primaryColor =' + inputPrimary.value
+    document.cookie = 'secondaryColor =' + inputSecondary.value
+    
     location.reload();
 }
 
@@ -186,35 +241,34 @@ function delayDetectConfig() {
 }
 
 function senderRemoveConfig() {
-    var delay = document.getElementById('senderConfig')
-    if (delay.value === 'your@email.here') {
-        delay.value = ''
+    var sender = document.getElementById('senderConfig')
+    if (sender.value === 'your@email.here') {
+        sender.value = ''
     }
 }
 
 function senderDetectConfig() {
-    var delay = document.getElementById('senderConfig')
-    if (delay.value === '') {
-        delay.value = 'your@email.here'
+    var sender = document.getElementById('senderConfig')
+    if (sender.value === '') {
+        sender.value = 'your@email.here'
     }
 }
 
 function passRemoveConfig() {
-    var delay = document.getElementById('passConfig')
-    if (delay.value === 'sender password') {
-        delay.value = ''
+    var pass = document.getElementById('passConfig')
+    if (pass.value === 'sender password') {
+        pass.value = ''
     }
 }
 
 function passDetectConfig() {
-    var delay = document.getElementById('passConfig')
-    if (delay.value === '') {
-        delay.value = 'sender password'
+    var pass = document.getElementById('passConfig')
+    if (pass.value === '') {
+        pass.value = 'sender password'
     }
 }
 
 var current = document.getElementById('currentOverlay')
-
 var dashboard = document.getElementById('dashboardOverlay')
 var config = document.getElementById('configOverlay')
 var logs = document.getElementById('logsOverlay')
@@ -289,13 +343,11 @@ function bypassToggle() {
     if (text.textContent === 'off') {
         text.textContent = 'on'
         light.style.backgroundColor = 'var(--primary)'
-        document.cookie = 'bypassToggle=true'
     }
 
     else {
         text.textContent = 'off'
         light.style.backgroundColor = 'var(--secondary)'
-        document.cookie = 'bypassToggle=false'
     }
 }
 
@@ -306,13 +358,11 @@ function alertToggle() {
     if (text.textContent === 'off') {
         text.textContent = 'on'
         light.style.backgroundColor = 'var(--primary)'
-        document.cookie = 'popupToggle=true'
     }
 
     else {
         text.textContent = 'off'
         light.style.backgroundColor = 'var(--secondary)'
-        document.cookie = 'popupToggle=false'
     }
 }
 
@@ -323,13 +373,11 @@ function animToggle() {
     if (text.textContent === 'off') {
         text.textContent = 'on'
         light.style.backgroundColor = 'var(--primary)'
-        document.cookie = 'animsToggle=true'
     }
 
     else {
         text.textContent = 'off'
         light.style.backgroundColor = 'var(--secondary)'
-        document.cookie = 'animsToggle=false'
     }
 }
 
@@ -340,13 +388,11 @@ function logoutToggle() {
     if (text.textContent === 'off') {
         text.textContent = 'on'
         light.style.backgroundColor = 'var(--primary)'
-        document.cookie = 'logoutToggle=true'
     }
 
     else {
         text.textContent = 'off'
         light.style.backgroundColor = 'var(--secondary)'
-        document.cookie = 'logoutToggle=false'
     }
 }
 
@@ -357,6 +403,18 @@ var cookies = document.cookie
 
 function cookieSetter() {
     var root = document.querySelector(':root')
+    var bypass = document.getElementById('bypassLight')
+    var alert = document.getElementById('alertLight')
+    var anim = document.getElementById('alertLight')
+    var logout = document.getElementById('logoutLight')
+
+    var target = document.getElementById('targetConfig')
+    var amount = document.getElementById('amountConfig')
+    var delay = document.getElementById('delayConfig')
+
+    var sender = document.getElementById('senderConfig')
+    var pass = document.getElementById('passConfig')
+
     var inputPrimary = document.getElementById('colorConfigPrimary')
     var inputSecondary = document.getElementById('colorConfigSecondary')
 
@@ -382,6 +440,7 @@ function cookieSetter() {
         inputSecondary.value = cookies.secondaryColor
     }
 
+    
 }
 
 function colorSetPrimary() {
@@ -389,7 +448,6 @@ function colorSetPrimary() {
     var input = document.getElementById('colorConfigPrimary')
     customColorInput = input.value
     root.style.setProperty('--primary', customColorInput)
-    document.cookie = 'primaryColor =' + customColorInput
     input.style.color = (customColorInput)
 }
 
@@ -398,7 +456,6 @@ function colorSetSecondary() {
     var input = document.getElementById('colorConfigSecondary')
     customColorInput = input.value
     root.style.setProperty('--secondary', customColorInput)
-    document.cookie = 'secondaryColor =' + customColorInput
     input.style.color = (customColorInput)
 }
 
